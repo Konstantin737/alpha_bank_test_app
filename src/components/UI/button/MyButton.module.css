@@ -1,0 +1,21 @@
+.my_button {
+   padding: 5px 5px;
+   margin: 20px auto;
+   border-radius: 5px;
+   border-color: rgb(147, 223, 223);
+   background-color: rgba(0, 255, 255, 0.192);
+   font-size: 20px;
+   cursor: pointer;
+
+}
+
+.my_button:hover {
+   background-color: rgba(0, 255, 255, 0.301);
+   box-shadow: 0 0 8px gray;
+   transition: 0.1s;
+}
+
+.my_button:active {
+   background-color: rgba(0, 255, 255, 0.192);
+   box-shadow: none;
+}
