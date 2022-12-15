@@ -9,13 +9,6 @@ import MySelect from './components/UI/select/MySelect';
 
 function App() {
 
-  async function fetchPosts() { //парсинг данных с удаленного сервера-папка API
-    const postsServer = await PostService.getAll();
-    setPosts(postsServer);//изменяю начальное состояние постов
-    setFilteredPosts(postsServer);//изменяю начальное состояние фильтрованных постов
-    window.history.go(-1); return false;
-  }
-
   const [posts, setPosts] = useState([ //начальное состояние постов
   {
     id: 1,
@@ -46,6 +39,11 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('');//состояние селектора сортировки
   const [filteredPosts, setFilteredPosts] = useState(posts);//состояние массива отфильтрованных постов
 
+  async function fetchPosts() { //парсинг данных с удаленного сервера-папка API
+    const postsServer = await PostService.getAll();
+    setFilteredPosts(postsServer);//изменяю начальное состояние фильтрованных постов
+    setPosts(postsServer);//изменяю начальное состояние постов
+  }
 
   const deletePost = (id) => {
     setPosts(posts.filter(p => p.id !== id))
@@ -94,10 +92,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-// onClick={fetchPosts}

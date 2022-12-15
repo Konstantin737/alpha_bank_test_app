@@ -8,7 +8,7 @@ const PostList = (props) => {
 
    if (!props.posts.length) {
       return (
-         <h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>-- Пока тут пусто --</h1>
+         <h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>-----  Пока тут пусто  :-( -----</h1>
       )
    }
 
