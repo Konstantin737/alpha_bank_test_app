@@ -9,6 +9,11 @@ import MySelect from './components/UI/select/MySelect';
 
 function App() {
 
+  const returnPosts = () => {
+    setPosts('');
+    setFilteredPosts('')
+  }
+
   const [posts, setPosts] = useState([ //начальное состояние постов
   {
     id: 1,
@@ -38,11 +43,14 @@ function App() {
 
   const [selectedSort, setSelectedSort] = useState('');//состояние селектора сортировки
   const [filteredPosts, setFilteredPosts] = useState(posts);//состояние массива отфильтрованных постов
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
 
   async function fetchPosts() { //парсинг данных с удаленного сервера-папка API
+    setIsPostsLoading(true);
     const postsServer = await PostService.getAll();
     setFilteredPosts(postsServer);//изменяю начальное состояние фильтрованных постов
     setPosts(postsServer);//изменяю начальное состояние постов
+    setIsPostsLoading(false);
   }
 
   const deletePost = (id) => {
@@ -85,8 +93,10 @@ function App() {
           {value: 'dislike', name: 'Показать не понравившиеся'}
         ]}
       />
-      <PostList posts={filteredPosts} deletePost={deletePost} likeOrDis={likeOrDis}/>
-      <MyButton onClick={() => {fetchPosts(); scrollToUp()}}>Загрузить данные с сервера</MyButton>
+      {isPostsLoading === true
+      ?<h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>Идет загрузка...</h1>
+      :<PostList posts={filteredPosts} deletePost={deletePost} likeOrDis={likeOrDis}/>}
+      <MyButton onClick={() => {fetchPosts(); scrollToUp(); returnPosts()}}>Загрузить данные с сервера</MyButton>
     </div>
   );
 }
