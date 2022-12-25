@@ -39,6 +39,7 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('');//состояние селектора сортировки
   const [filteredPosts, setFilteredPosts] = useState(posts);//состояние массива отфильтрованных постов
   const [isPostsLoading, setIsPostsLoading] = useState(false);
+  const[showLikesPosts, setShowLikesPosts] = useState('')
 
   async function fetchPosts() { //парсинг данных с удаленного сервера-папка API
     setIsPostsLoading(true);
@@ -74,6 +75,16 @@ function App() {
     }
   }
 
+  const showLikesPostsFunc = () => {
+    newFilteredArr = newFilteredArr.filter(post => post.like === true)
+    setFilteredPosts(newFilteredArr);
+  }
+
+  const closeLikesPostsFunc = () => {
+    newFilteredArr = newFilteredArr.filter(post => post.id >= 1)
+    setFilteredPosts(newFilteredArr);
+  }
+
   const scrollToUp = () => {window.scrollTo({ top: 0, behavior: 'smooth' })}
 
   return (
@@ -88,6 +99,7 @@ function App() {
           {value: 'dislike', name: 'Показать не понравившиеся'}
         ]}
       />
+      <MyButton styles={{justifyContent: 'start'}} onMouseDown={showLikesPostsFunc} onMouseUp={closeLikesPostsFunc} onMouseOut={closeLikesPostsFunc}>Показать понравившиеся</MyButton>
       {isPostsLoading === true
       ?<h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>Идет загрузка...</h1>
       :<PostList posts={filteredPosts} deletePost={deletePost} likeOrDis={likeOrDis}/>}

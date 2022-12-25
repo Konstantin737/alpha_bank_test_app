@@ -34,7 +34,7 @@ const PostItem = (props) => {
 
    return (
       <div className={styles.post}>
-         <ModalWindow visible={visible} onClickOverlay={modalWindowClose} imageURL = {props.post.url}/>
+         <ModalWindow visible={visible} modalWindowClose={modalWindowClose} imageURL = {props.post.url}/>
          <div className={styles.post__content}>
             <strong>{props.number}. {props.post.title}</strong>
             <img className={styles.image} src={props.post.thumbnailUrl} onClick={visibleModal}/>

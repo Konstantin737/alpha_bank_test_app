@@ -12,11 +12,11 @@ const ModalWindow = (props) => {
    
    return (
       <React.Fragment>
-         <div className={modalVindowIsNone.join(' ')} onClick={props.onClickOverlay}>
+         <div className={modalVindowIsNone.join(' ')} onClick={props.modalWindowClose}>
             <div className={styles.overlay}></div>
             <div className={styles.modal}>
                <img className={styles.image} src={props.imageURL}></img>
-               <button className={styles.modal_btn} onClick={props.onClickOverlay}>X</button>
+               <button className={styles.modal_btn} onClick={props.modalWindowClose}>X</button>
             </div>
          </div>
       </React.Fragment>
