@@ -9,11 +9,6 @@ import MySelect from './components/UI/select/MySelect';
 
 function App() {
 
-  const returnPosts = () => {
-    setPosts('');
-    setFilteredPosts('')
-  }
-
   const [posts, setPosts] = useState([ //начальное состояние постов
   {
     id: 1,
@@ -96,9 +91,23 @@ function App() {
       {isPostsLoading === true
       ?<h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>Идет загрузка...</h1>
       :<PostList posts={filteredPosts} deletePost={deletePost} likeOrDis={likeOrDis}/>}
-      <MyButton onClick={() => {fetchPosts(); scrollToUp(); returnPosts()}}>Загрузить данные с сервера</MyButton>
+      <MyButton onClick={() => {fetchPosts(); scrollToUp()}}>Загрузить данные с сервера</MyButton>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+//не понял почему, но лайки стали сниматся при загрузке с сервера без этой конструкции
+// const returnPosts = () => { // обнуляю состояния массивов на пустую строку, при нажатии на кнопку 'Загрузить с сервера'
+//   setPosts('');
+//   setFilteredPosts('')
+// }
+
+// returnPosts()
