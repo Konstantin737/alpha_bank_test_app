@@ -41,6 +41,7 @@ function App() {
   const [isPostsLoading, setIsPostsLoading] = useState(false);
   const [showLikesPosts, setShowLikesPosts] = useState('')
   const [pressButton, setPressButton] = useState(false)
+  const [vievLikes, setVievLikes] = useState('Показать понравившиеся')
 
   async function fetchPosts() { //парсинг данных с удаленного сервера-папка API
     setIsPostsLoading(true);
@@ -75,22 +76,19 @@ function App() {
       setFilteredPosts(newFilteredArr);
     }
   }
-  
+
   const showLikesPostsFunc = () => {
     if(!pressButton) {
     newFilteredArr = newFilteredArr.filter(post => post.like === true)
     setFilteredPosts(newFilteredArr);
     setPressButton(!pressButton)
+    setVievLikes('Показать все')
     } else {
       newFilteredArr = newFilteredArr.filter(post => post.id >= 1)
       setFilteredPosts(newFilteredArr);
       setPressButton(!pressButton)
+      setVievLikes('Показать понравившиеся')
     }
-  }
-
-  const closeLikesPostsFunc = () => {
-    newFilteredArr = newFilteredArr.filter(post => post.id >= 1)
-    setFilteredPosts(newFilteredArr);
   }
 
   const scrollToUp = () => {window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -107,7 +105,7 @@ function App() {
           {value: 'dislike', name: 'Показать не понравившиеся'}
         ]}
       />
-      <MyButton onClick={showLikesPostsFunc}>Показать понравившиеся</MyButton>
+      <MyButton onClick={showLikesPostsFunc}>{vievLikes}</MyButton>
       {isPostsLoading === true
       ?<h1 style={{textAlign:'center', color: 'gray', marginTop: '30px'}}>Идет загрузка...</h1>
       :<PostList posts={filteredPosts} deletePost={deletePost} likeOrDis={likeOrDis}/>}
